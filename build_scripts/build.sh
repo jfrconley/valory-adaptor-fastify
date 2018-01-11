@@ -2,6 +2,7 @@
 source "$NVM_DIR/nvm.sh"
 npm install
 #npm test
+npm run build
 if [ $GIT_REF == $DEPLOYMENT_REF ]; then
     npm run release
 else
