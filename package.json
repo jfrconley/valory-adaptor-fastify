@@ -14,6 +14,10 @@
 	},
 	"author": "",
 	"license": "ISC",
+	"files": [
+		"dist",
+		"package.json"
+	],
 	"devDependencies": {
 		"@commitlint/cli": "^6.0.1",
 		"@commitlint/config-conventional": "^5.2.3",
