@@ -18,9 +18,6 @@
 				"src/types/*"
 			]
 		},
-		"types": [
-			"bluebird-global"
-		],
 		"alwaysStrict": true
 	},
 	"include": [
