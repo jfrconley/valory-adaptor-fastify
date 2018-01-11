@@ -2,6 +2,7 @@
 	"name": "valory-adaptor-fastify",
 	"version": "1.0.0",
 	"description": "Fastify adaptor for valory",
+	"typings": "dist/adaptor-fastify.d.ts",
 	"main": "dist/adaptor-fastify.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -33,6 +34,7 @@
 		"fastify-formbody": "^1.2.1"
 	},
 	"release": {
+		"repositoryUrl": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/valory-adaptor-fastify",
 		"branch": "master",
 		"verifyConditions": [
 			"@semantic-release/npm"
