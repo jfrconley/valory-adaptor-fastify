@@ -1,0 +1,45 @@
+{
+	"name": "valory-adaptor-fastify",
+	"version": "1.0.0",
+	"description": "Fastify adaptor for valory",
+	"main": "dist/adaptor-fastify.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"pretest": "npm run build",
+		"build": "tsc",
+		"prepare": "npm run build",
+		"release": "semantic-release",
+		"commitmsg": "commitlint -e $GIT_PARAMS"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@commitlint/cli": "^6.0.1",
+		"@commitlint/config-conventional": "^5.2.3",
+		"@types/node": "^9.3.0",
+		"cz-conventional-changelog": "^2.1.0",
+		"husky": "^0.14.3",
+		"semantic-release": "^11.0.2",
+		"typescript": "^2.6.2",
+		"valory": ">=0.1.0"
+	},
+	"peerDependencies": {
+		"valory": ">=0.1.0"
+	},
+	"dependencies": {
+		"fast.js": "^0.1.1",
+		"fastify": "^0.39.1",
+		"fastify-formbody": "^1.2.1"
+	},
+	"release": {
+		"branch": "master",
+		"verifyConditions": [
+			"@semantic-release/npm"
+		]
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
+}
