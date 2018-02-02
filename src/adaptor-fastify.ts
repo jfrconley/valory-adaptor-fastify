@@ -7,6 +7,7 @@ const intern = require("fast.js/string/intern");
 const pathReplacer = /{([\S]*?)}/g;
 
 export class FastifyAdaptor implements ApiServer {
+	public readonly locallyRunnable: boolean = true;
 	public readonly allowDocSite: boolean = true;
 	private instance: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify({});
 	constructor() {
@@ -41,7 +42,7 @@ export class FastifyAdaptor implements ApiServer {
 	}
 
 	public getExport(metadata: ValoryMetadata, options: any): {valory: ValoryMetadata} {
-		this.instance.listen(options.port);
+		this.instance.listen(options.port || process.env.PORT);
 		return {valory: metadata};
 	}
 
