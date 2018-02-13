@@ -35,7 +35,7 @@
 	"dependencies": {
 		"fast.js": "^0.1.1",
 		"fastify": "^0.39.1",
-		"fastify-formbody": "^1.2.1"
+		"fastify-formbody": "1.2.1"
 	},
 	"release": {
 		"repositoryUrl": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/valory-adaptor-fastify",
