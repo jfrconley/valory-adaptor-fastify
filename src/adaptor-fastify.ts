@@ -1,5 +1,5 @@
 import {ApiExchange, ApiServer, HttpMethod, ValoryMetadata} from "valory";
-import {FastifyInstance, HTTPMethod} from "fastify";
+import {FastifyInstance, HTTPMethod } from "fastify";
 import {IncomingMessage, ServerResponse, Server} from "http";
 import fastify = require("fastify");
 const formBody = require("fastify-formbody");
@@ -12,6 +12,7 @@ export class FastifyAdaptor implements ApiServer {
 	private instance: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify({});
 	constructor() {
 		this.instance.register(formBody);
+		(this.instance as any).addContentTypeParser("application/json", {parseAs: "string"}, jsonParser);
 	}
 	public register(path: string, method: HttpMethod,
 					handler: (request: ApiExchange) => ApiExchange | Promise<ApiExchange>) {
@@ -24,7 +25,8 @@ export class FastifyAdaptor implements ApiServer {
 				// FIXME: setting both formData and body is lazy, need a better solution
 				const transRequest: ApiExchange = {
 					headers: req.req.headers as {[key: string]: any},
-					body: req.body,
+					body: null,
+					rawBody: null,
 					formData: req.body,
 					query: req.query,
 					path: req.params,
@@ -33,6 +35,12 @@ export class FastifyAdaptor implements ApiServer {
 					route,
 				};
 
+				if (req.req.headers["content-type"] === "application/json") {
+					transRequest.body = req.body.parsed;
+					transRequest.rawBody = req.body.raw;
+				} else {
+					transRequest.body = req.body;
+				}
 				const response = await handler(transRequest);
 				res.code(response.statusCode);
 				(res as any).headers(response.headers);
@@ -49,4 +57,15 @@ export class FastifyAdaptor implements ApiServer {
 	public shutdown() {
 		this.instance.server.close();
 	}
+}
+
+function jsonParser(req: IncomingMessage, body: string, done: (err?: Error, value?: any) => void) {
+	let json = null;
+	try {
+		json = JSON.parse(body);
+	} catch (err) {
+		err.statusCode = 400;
+		return done(err, undefined);
+	}
+	done(null, {parsed: json, raw: body});
 }
