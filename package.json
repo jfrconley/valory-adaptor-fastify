@@ -38,7 +38,7 @@
     "fastify-formbody": "1.2.5"
   },
   "release": {
-    "repositoryUrl": "ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/valory-adaptor-fastify",
+    "repositoryUrl": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/valory-adaptor-fastify",
     "branch": "master",
     "verifyConditions": [
       "@semantic-release/npm"
