@@ -1,57 +1,57 @@
 {
-	"name": "valory-adaptor-fastify",
-	"version": "1.2.0",
-	"description": "Fastify adaptor for valory",
-	"typings": "dist/adaptor-fastify.d.ts",
-	"main": "dist/adaptor-fastify.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"pretest": "npm run build",
-		"build": "tsc",
-		"prepare": "npm run build",
-		"release": "semantic-release",
-		"commitmsg": "commitlint -e $GIT_PARAMS"
-	},
-	"author": "",
-	"license": "ISC",
-	"files": [
-		"dist",
-		"package.json"
-	],
-	"devDependencies": {
-		"@commitlint/cli": "^6.0.1",
-		"@commitlint/config-conventional": "^6.1.0",
-		"@types/node": "^9.3.0",
-		"cz-conventional-changelog": "^2.1.0",
-		"@types/swagger-schema-official": "^2.0.8",
-		"husky": "^0.14.3",
-		"semantic-release": "^12.4.1",
-		"typescript": "^2.6.2",
-		"valory": ">=1.2.4"
-	},
-	"peerDependencies": {
-		"valory": ">=1.2.4"
-	},
-	"dependencies": {
-		"fast.js": "^0.1.1",
-		"fastify": "^1.0.0-rc.2",
-		"fastify-formbody": "1.2.5"
-	},
-	"release": {
-		"repositoryUrl": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/valory-adaptor-fastify",
-		"branch": "master",
-		"verifyConditions": [
-			"@semantic-release/npm"
-		],
-		"publish": [
-			"@semantic-release/npm"
-		],
-		"success": [],
-		"fail": []
-	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
-		}
-	}
+  "name": "valory-adaptor-fastify",
+  "version": "1.3.0",
+  "description": "Fastify adaptor for valory",
+  "typings": "dist/adaptor-fastify.d.ts",
+  "main": "dist/adaptor-fastify.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretest": "npm run build",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "release": "semantic-release",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
+  },
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "^6.0.1",
+    "@commitlint/config-conventional": "^6.1.0",
+    "@types/node": "^9.3.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "@types/swagger-schema-official": "^2.0.8",
+    "husky": "^0.14.3",
+    "semantic-release": "^12.4.1",
+    "typescript": "^2.6.2",
+    "valory": ">=1.2.4"
+  },
+  "peerDependencies": {
+    "valory": ">=1.2.4"
+  },
+  "dependencies": {
+    "fast.js": "^0.1.1",
+    "fastify": "^1.0.0-rc.2",
+    "fastify-formbody": "1.2.5"
+  },
+  "release": {
+    "repositoryUrl": "ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/valory-adaptor-fastify",
+    "branch": "master",
+    "verifyConditions": [
+      "@semantic-release/npm"
+    ],
+    "publish": [
+      "@semantic-release/npm"
+    ],
+    "success": [],
+    "fail": []
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
