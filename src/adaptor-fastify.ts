@@ -50,7 +50,7 @@ export class FastifyAdaptor implements ApiServer {
 	}
 
 	public getExport(metadata: ValoryMetadata, options: any): {valory: ValoryMetadata} {
-		this.instance.listen(options.port || process.env.PORT);
+		this.instance.listen(options.port || process.env.PORT, options.host || process.env.HOST);
 		return {valory: metadata};
 	}
 
