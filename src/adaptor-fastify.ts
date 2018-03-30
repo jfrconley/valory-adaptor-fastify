@@ -1,7 +1,8 @@
-import {ApiExchange, ApiServer, HttpMethod, ValoryMetadata} from "valory";
+import {ApiExchange, ApiResponse, ApiServer, HttpMethod, ValoryMetadata} from "valory";
 import {FastifyInstance, HTTPMethod } from "fastify";
 import {IncomingMessage, ServerResponse, Server} from "http";
 import fastify = require("fastify");
+import {ApiRequest} from "valory/dist/server/request";
 const formBody = require("fastify-formbody");
 const intern = require("fast.js/string/intern");
 const pathReplacer = /{([\S]*?)}/g;
@@ -15,7 +16,7 @@ export class FastifyAdaptor implements ApiServer {
 		(this.instance as any).addContentTypeParser("application/json", {parseAs: "string"}, jsonParser);
 	}
 	public register(path: string, method: HttpMethod,
-					handler: (request: ApiExchange) => ApiExchange | Promise<ApiExchange>) {
+					handler: (request: ApiExchange) => ApiResponse | Promise<ApiResponse>) {
 		const route = `${path}:${HttpMethod[method]}`;
 		path = intern(path.replace(pathReplacer, ":$1"));
 		this.instance.route({
@@ -23,18 +24,15 @@ export class FastifyAdaptor implements ApiServer {
 			url: path,
 			handler: async (req, res) => {
 				// FIXME: setting both formData and body is lazy, need a better solution
-				const transRequest: ApiExchange = {
+				const transRequest = new ApiRequest({
 					headers: req.req.headers as {[key: string]: any},
 					body: null,
 					rawBody: null,
 					formData: req.body,
 					query: req.query,
 					path: req.params,
-					statusCode: 0,
-					attachments: {},
 					route,
-				};
-
+				});
 				if (req.req.headers["content-type"] === "application/json") {
 					transRequest.body = req.body.parsed;
 					transRequest.rawBody = req.body.raw;
