@@ -16,7 +16,7 @@ export class FastifyAdaptor implements ApiServer {
 		(this.instance as any).addContentTypeParser("application/json", {parseAs: "string"}, jsonParser);
 	}
 	public register(path: string, method: HttpMethod,
-					handler: (request: ApiExchange) => ApiResponse | Promise<ApiResponse>) {
+					handler: (request: ApiRequest) => ApiResponse | Promise<ApiResponse>) {
 		const route = `${path}:${HttpMethod[method]}`;
 		path = intern(path.replace(pathReplacer, ":$1"));
 		this.instance.route({
