@@ -1,6 +1,6 @@
 import {Info} from "swagger-schema-official";
 import {FastifyAdaptor} from "../adaptor-fastify";
-import {ApiMiddleware, Valory} from "valory";
+import {ApiExchange, ApiMiddleware, ApiResponse, Valory} from "valory";
 
 const info: Info = {
 	title: "Test api",
@@ -184,7 +184,7 @@ api.get("/burn/{name}", {
 		},
 	},
 }, (req, logger) => {
-	return api.buildSuccess({body: req.body, raw: req.rawBody})
+	return api.buildSuccess({body: req.body, raw: req.rawBody}) as ApiResponse;
 });
 
 api.post("/formtest", {
@@ -260,7 +260,7 @@ api.post("/burn", {
 }, (req, logger) => {
 	// logger.info(req);
 
-	return api.buildSuccess({body: req.body, raw: req.rawBody});
+	return api.buildSuccess({body: req.body, raw: req.rawBody}) as ApiResponse;
 
 });
 
