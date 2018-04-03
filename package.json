@@ -27,10 +27,10 @@
     "husky": "^0.14.3",
     "semantic-release": "^12.4.1",
     "typescript": "^2.6.2",
-    "valory": ">=2.0.0"
+    "valory": ">=2.1.0"
   },
   "peerDependencies": {
-    "valory": ">=2.0.0"
+    "valory": ">=2.1.0"
   },
   "dependencies": {
     "fast.js": "^0.1.1",
