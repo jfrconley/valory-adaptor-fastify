@@ -159,11 +159,7 @@ api.get("/burn", {
 		},
 	],
 }, (req) => {
-	return {
-		body: "yay",
-		statusCode: 200,
-		headers: {},
-	};
+	return api.buildSuccess("yay");
 });
 
 api.get("/burn/{name}", {
@@ -184,7 +180,7 @@ api.get("/burn/{name}", {
 		},
 	},
 }, (req, logger) => {
-	return api.buildSuccess({body: req.body, raw: req.rawBody}) as ApiResponse;
+	return api.buildSuccess({body: req.body, raw: req.rawBody});
 });
 
 api.post("/formtest", {
@@ -260,7 +256,7 @@ api.post("/burn", {
 }, (req, logger) => {
 	// logger.info(req);
 
-	return api.buildSuccess({body: req.body, raw: req.rawBody}) as ApiResponse;
+	return api.buildSuccess({body: req.body, raw: req.rawBody});
 
 });
 
