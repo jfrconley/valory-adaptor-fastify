@@ -1,13 +1,12 @@
-import {Info} from "swagger-schema-official";
 import {FastifyAdaptor} from "../adaptor-fastify";
-import {ApiExchange, ApiMiddleware, ApiResponse, Valory} from "valory";
+import {Swagger, ApiMiddleware, ApiResponse, Valory} from "valory-runtime";
 
-const info: Info = {
+const info: Swagger.Info = {
 	title: "Test api",
 	version: "1",
 };
 
-const definitions = {
+const definitions: {[name: string]: Swagger.Schema} = {
 	Animal: {
 		discriminator: "dtype",
 		required: [
@@ -122,7 +121,13 @@ const definitions = {
 	},
 };
 
-const api = new Valory(info, {}, ["application/json"], ["application/json"], definitions, [], new FastifyAdaptor());
+const api = Valory.createInstance({
+	info,
+	definitions,
+	server: new FastifyAdaptor(),
+});
+
+// const api = new Valory(info, {}, ["application/json"], ["application/json"], definitions, [], new FastifyAdaptor());
 
 const TestMiddleware: ApiMiddleware = {
 	name: "TestMiddleware",
