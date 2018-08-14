@@ -1,4 +1,4 @@
-import {ApiExchange, ApiResponse, ApiServer, HttpMethod, ValoryMetadata, ApiRequest} from "valory-runtime";
+import {ApiResponse, ApiServer, HttpMethod, ValoryMetadata, ApiRequest} from "valory-runtime";
 import {FastifyInstance, HTTPMethod } from "fastify";
 import {IncomingMessage, ServerResponse, Server} from "http";
 import fastify = require("fastify");
