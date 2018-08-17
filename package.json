@@ -57,5 +57,9 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
-  "repository": "https://github.com/jfrconley/valory-adaptor-fastify.git"
+  "repository": "https://github.com/jfrconley/valory-adaptor-fastify.git",
+  "keywords": [
+    "valory",
+    "fastify"
+  ]
 }
