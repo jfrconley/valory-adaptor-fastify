@@ -36,13 +36,15 @@
     "fastify": "^1.9.0"
   },
   "release": {
-    "repositoryUrl": "ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/valory-adaptor-fastify",
+    "repositoryUrl": "https://github.com/jfrconley/valory-adaptor-fastify.git",
     "branch": "master",
     "verifyConditions": [
-      "@semantic-release/npm"
+      "@semantic-release/npm",
+      "@semantic-release/github"
     ],
     "publish": [
-      "@semantic-release/npm"
+      "@semantic-release/npm",
+      "@semantic-release/github"
     ],
     "success": [],
     "fail": []
@@ -54,5 +56,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
-  }
+  },
+  "repository": "https://github.com/jfrconley/valory-adaptor-fastify.git"
 }
