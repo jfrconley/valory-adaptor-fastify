@@ -38,6 +38,9 @@ export class FastifyAdaptor implements ApiServer {
                     transRequest.body = req.body;
                 }
                 return handler(transRequest).then((response) => {
+                    if (response.headers["Content-Type"] === "application/json" && typeof response.body === "string") {
+                        res.serializer(noopSerializer);
+                    }
                     res.code(response.statusCode);
                     (res as any).headers(response.headers);
                     res.send(response.body);
@@ -54,6 +57,10 @@ export class FastifyAdaptor implements ApiServer {
     public shutdown() {
         this.instance.server.close();
     }
+}
+
+function noopSerializer(data: any) {
+    return data;
 }
 
 function jsonParser(req: IncomingMessage, body: string, done: (err?: Error, body?: any) => void) {
