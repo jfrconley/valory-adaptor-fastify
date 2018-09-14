@@ -14,13 +14,13 @@ export class FastifyAdaptor implements ApiServer {
         this.instance.addContentTypeParser("application/json", {parseAs: "string"}, jsonParser as any);
     }
     public register(path: string, method: HttpMethod,
-                    handler: (request: ApiRequest) => ApiResponse | Promise<ApiResponse>) {
+                    handler: (request: ApiRequest) => Promise<ApiResponse>) {
         const route = `${path}:${HttpMethod[method]}`;
         path = path.replace(pathReplacer, ":$1");
         this.instance.route({
             method: HttpMethod[method] as HTTPMethod,
             url: path,
-            handler: async (req, res) => {
+            handler: (req, res) => {
                 // FIXME: setting both formData and body is lazy, need a better solution
                 const transRequest = new ApiRequest({
                     headers: req.req.headers as {[key: string]: any},
@@ -37,10 +37,11 @@ export class FastifyAdaptor implements ApiServer {
                 } else {
                     transRequest.body = req.body;
                 }
-                const response = await handler(transRequest);
-                res.code(response.statusCode);
-                (res as any).headers(response.headers);
-                res.send(response.body);
+                return handler(transRequest).then((response) => {
+                    res.code(response.statusCode);
+                    (res as any).headers(response.headers);
+                    res.send(response.body);
+                });
             },
         });
     }
